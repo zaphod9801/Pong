@@ -1,0 +1,194 @@
+class Game {
+    field Jugador j1, j2;
+    field Bola b;
+    field int direction1;
+    field int direction2;
+    field int rebote;
+    field int start;
+    field int puntos1, puntos2;
+    field Numero p1;
+    field Numero2 p2;
+
+
+    constructor Game new (){
+        do Screen.drawRectangle(250,1,252,255);
+        let j1 = Jugador.new(1,90,10,60);
+        let j2 = Jugador.new(500,90,10,60);
+        let b = Bola.new(254,127,8,8);
+        let direction1 = 0;
+        let direction2 = 0;
+        let rebote = 0;
+        let start = 1;
+        let puntos1 = 0;
+        let puntos2 = 0;
+        let p1 = Numero.new(puntos1);
+        let p2 = Numero2.new(puntos2);
+        return this;
+    }
+    
+    method void dispose(){
+        do j1.dispose();
+        do j2.dispose();
+        do b.dispose();
+        do Memory.deAlloc(this);
+        return;
+    }
+
+    method void run() {
+        
+        var char key;
+        var boolean exit;
+        let exit = false;
+
+        while (~exit) {
+            while (key = 0) {
+                do Screen.drawRectangle(250,1,252,255);
+                let p1 = Numero.new(puntos1);
+                let p2 = Numero2.new(puntos2);
+                let key = Keyboard.keyPressed();
+                do start();
+                do bounce();
+                do Moveplayer1();
+                do Moveplayer2();
+                if ((puntos1=2) | (puntos2=2)){
+                    let exit = true;
+                }
+            }
+            
+            
+
+            if (key = 48) {
+                let start = 1;
+            }
+
+            if (key = 32) {
+                let exit = true;
+            }
+
+            if (key = 131) {
+                let direction1 = 1;
+            }
+            if (key = 133) {
+                let direction1 = 2;
+            }
+
+            if (key = 87) {
+                let direction2 = 1;
+            }
+
+            if (key = 83) {
+                let direction2 = 2;
+            }
+            
+
+            if ((puntos1=2) | (puntos2=2)){
+                let exit = true;
+            }
+
+
+            while (~(key = 0)) {
+                do Screen.drawRectangle(250,1,252,255);
+                let p1 = Numero.new(puntos1);
+                let p2 = Numero2.new(puntos2);
+                let key = Keyboard.keyPressed();
+                do bounce();
+                do Moveplayer1();
+                do Moveplayer2();
+                if ((puntos1=2) | (puntos2=2)){
+                    let exit = true;
+                }
+            }
+        }
+        return;
+    }
+
+    method void start(){
+        if (start=1) {do b.move();}
+        do Sys.wait(5);
+        return;
+    }
+
+    method void Moveplayer1 () {
+        if (direction1=1) {do j1.Up();}
+        if (direction1=2) {do j1.Down();}
+
+        do Sys.wait(5);
+        return;
+    }
+
+    method void Moveplayer2 () {
+        if (direction2=1) {do j2.Up();}
+        if (direction2=2) {do j2.Down();}
+
+        do Sys.wait(5);
+        return;
+    }
+
+    method void bounce (){
+        var int x,y;
+        //do Sys.wait(500);
+        var int a,m,ba, a2, m2,ba2;
+
+        if ((b.getY() < 1) | (b.getY() > 240)){
+            do b.setv(b.getvx(),(b.getvy()*-1));
+        }
+
+        let a = j1.getY1()+(j1.getY2()/3);
+        let m = j1.getY1()+(2*(j1.getY2()/3));
+        let ba = j1.getY1()+j1.getY2();
+        let a2 = j2.getY1()+(j2.getY2()/3);
+        let m2 = j2.getY1()+(2*(j2.getY2()/3));
+        let ba2 = j2.getY1()+j2.getY2();
+
+        if (b.getX() = 10){
+            if ((j1.getY1()<b.getY()) & (a>b.getY())){
+                do b.setv((b.getvx()*-1),-1);
+            } else {
+                if ((a<b.getY()) & (m>b.getY())){
+                    do b.setv((b.getvx()*-1),b.getvy());
+                }
+                else {
+                    if ((m<b.getY()) & (ba>b.getY())){
+                        do b.setv((b.getvx()*-1),1);
+                    } 
+                }
+            }
+        }
+
+        if (b.getX() = 490){
+            if ((j2.getY1()<b.getY()) & (a2>b.getY())){
+                do b.setv((b.getvx()*-1),-1);
+            } else {
+                if ((a2<b.getY()) & (m2>b.getY())){
+                    do b.setv((b.getvx()*-1),b.getvy());
+                }
+                else {
+                    if ((m2<b.getY()) & (ba2>b.getY())){
+                        do b.setv((b.getvx()*-1),1);
+                    } 
+                }
+            }
+        }
+
+        if (b.getX() = 1) {
+            //do Output.printString("|");
+            let puntos2 = puntos2 + 1;
+            do Screen.setColor(false);
+            do Screen.drawRectangle(b.getX(),b.getY(),b.getX()+b.getX2(),b.getY()+b.getY2());
+            do Screen.setColor(true);
+            let b = Bola.new(254,127,8,8);
+        }
+
+        if (b.getX() = 492) {
+            //do Output.printString("|");
+            let puntos1 = puntos1 + 1;
+            do Screen.setColor(false);
+            do Screen.drawRectangle(b.getX(),b.getY(),b.getX()+b.getX2(),b.getY()+b.getY2());
+            do Screen.setColor(true);
+            let b = Bola.new(254,127,8,8);
+        }
+
+        do Sys.wait(5);
+        return;
+   }
+}

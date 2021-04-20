@@ -1,0 +1,73 @@
+class Numero {
+    //atribute
+    field int n;
+
+    //constructor
+    constructor Numero new (int n2){
+        let n = n2;
+        if (n2 = 0){
+            do Draw0();
+        }
+        if (n2 = 1){
+            do Draw1();
+        }
+        if (n2 = 2){
+            do Draw2();
+        }
+        return this;
+    }
+
+    //destructor
+    method void dispose(){
+        do Memory.deAlloc(this);
+        return;
+    }
+
+    method void Draw0 () {
+        do Screen.setColor(true);
+        do Screen.drawLine(200,2,210,2);
+        do Screen.drawLine(200,2,200,20);
+        do Screen.drawLine(210,2,210,20);
+        do Screen.drawLine(200,20,210,20);
+        return;
+    }
+
+    method void Draw1 () {
+        do Screen.setColor(false);
+        do Screen.drawLine(200,2,210,2);
+        do Screen.drawLine(200,2,200,20);
+        do Screen.drawLine(210,2,210,20);
+        do Screen.drawLine(200,20,210,20);
+        do Screen.setColor(true);
+        do Screen.drawLine(210,2,210,20);
+        return;
+    }
+
+
+    method void Draw2 () {
+        do Screen.setColor(false);
+        do Screen.drawLine(210,2,210,20);
+        do Screen.setColor(true);
+        do Screen.drawLine(200,2,210,2);
+        do Screen.drawLine(210,2,200,20);
+        do Screen.drawLine(200,20,210,20);
+        return;
+    }
+
+
+
+    method void Erase () {
+        do Screen.setColor(false);
+
+        return;
+    }
+   
+
+
+    method int getn(){
+        return n;
+    }
+
+
+
+}

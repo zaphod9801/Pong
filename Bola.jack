@@ -1,0 +1,104 @@
+class Bola {
+    //atribute
+    field int x1, y1, x2, y2;
+    field int vx, vy;
+
+    //constructor
+    constructor Bola new (int xx1 , int yy1, int xx2, int yy2){
+        let x1 = xx1;
+        let x2 = xx2;
+        let y1 = yy1;
+        let y2 = yy2;
+        let vx = 1;
+        let vy = -1;
+        do Draw();
+        return this;
+    }
+
+    //destructor
+    method void dispose(){
+        do Memory.deAlloc(this);
+        return;
+    }
+
+    method void Draw () {
+        do Screen.setColor(true);
+        do Screen.drawRectangle(x1,y1,x1+x2,y1+y2);
+        return;
+    }
+
+    method void Erase () {
+        do Screen.setColor(false);
+        do Screen.drawRectangle(x1,y1,x1+x2,y1+y2);
+        return;
+    }
+
+    method int getX(){
+        return x1;
+    }
+
+    method int getY(){
+        return y1;
+    }
+
+    method int getX2(){
+        return x2;
+    }
+
+    method int getY2(){
+        return y2;
+    }
+   
+
+    method void Up () {
+        if (y1 > 1) {
+            do Screen.setColor(false);
+            do Screen.drawRectangle(x1,(y1+y2)-1,x1+x2,y1+y2);
+            let y1 = y1 - 2;
+            do Screen.setColor(true);
+            do Screen.drawRectangle(x1,y1,x1+x2,y1+1);
+        }
+
+        return;
+    }
+
+   
+
+    method void Left() {
+        if (x1 > 1) {
+           do Screen.setColor(false);
+           do Screen.drawRectangle((x1 + x2) - 1, y1, x1 + x2, y1 + y2);
+           let x1 = x1 - 2;
+           do Screen.setColor(true);
+           do Screen.drawRectangle(x1, y1, x1 + 1, y1 + y2);
+        }
+        return;
+     }
+
+    
+    method void move(){
+        do Screen.setColor(false);
+        do Screen.drawRectangle(x1,y1,x1+x2,y1+y2);
+        let x1 = x1 + vx;
+        let y1 = y1 + vy;
+        do Screen.setColor(true);
+        do Screen.drawRectangle(x1,y1,x1+x2,y1+y2);
+        
+        return;
+    }
+
+    method void setv(int vx2, int vy2) {
+        let vx = vx2;
+        let vy = vy2;
+        return; 
+    }
+
+    method int getvx(){
+        return vx;
+    }
+
+    method int getvy(){
+        return vy;
+    }
+
+}

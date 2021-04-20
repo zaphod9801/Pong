@@ -1,0 +1,73 @@
+class Jugador {
+    //atribute
+    field int x1, y1, x2, y2;
+
+    //constructor
+    constructor Jugador new (int xx1 , int yy1, int xx2, int yy2){
+        let x1 = xx1;
+        let x2 = xx2;
+        let y1 = yy1;
+        let y2 = yy2;
+        do Draw();
+        return this;
+    }
+
+    //destructor
+    method void dispose(){
+        do Memory.deAlloc(this);
+        return;
+    }
+
+    method void Draw () {
+        do Screen.setColor(true);
+        do Screen.drawRectangle(x1,y1,x1+x2,y1+y2);
+        return;
+    }
+
+    method void Erase () {
+        do Screen.setColor(false);
+        do Screen.drawRectangle(x1,y1,x1+x2,y1+y2);
+        return;
+    }
+   
+    method void Up () {
+        if (y1 > 1) {
+            do Screen.setColor(false);
+            do Screen.drawRectangle(x1,(y1+y2)-1,x1+x2,y1+y2);
+            let y1 = y1 - 2;
+            do Screen.setColor(true);
+            do Screen.drawRectangle(x1,y1,x1+x2,y1+1);
+        }
+
+        return;
+    }
+
+    method void Down () {
+        if ((y1+y2) < 254) {
+            do Screen.setColor(false);
+            do Screen.drawRectangle(x1,y1,x1+x2,y1+1);
+            let y1 = y1 + 2;
+            do Screen.setColor(true);
+            do Screen.drawRectangle(x1,(y1+y2)-1,x1+x2,y1+y2);
+        }
+
+        return;
+    }
+
+    method int getX1(){
+        return x1;
+    }
+
+    method int getY1(){
+        return y1;
+    }
+
+    method int getX2(){
+        return x2;
+    }
+
+    method int getY2(){
+        return y2;
+    }
+
+}
