@@ -1,5 +1,5 @@
 function Game.new 0
-push constant 11
+push constant 14
 call Memory.alloc 1
 pop pointer 0
 push constant 250
@@ -38,6 +38,8 @@ push constant 0
 pop this 7
 push constant 0
 pop this 8
+push constant 1
+pop this 11
 push this 7
 call Numero.new 1
 pop this 9
@@ -234,8 +236,12 @@ push constant 0
 not
 pop local 1
 label IF_FALSE8
+push constant 0
+pop local 0
 goto WHILE_EXP2
 label WHILE_END2
+push constant 0
+pop local 0
 goto WHILE_EXP0
 label WHILE_END0
 push constant 0
@@ -323,7 +329,10 @@ push constant 1
 lt
 push this 2
 call Bola.getY 1
-push constant 240
+push constant 248
+push this 2
+call Bola.getY2 1
+sub
 gt
 or
 if-goto IF_TRUE0
@@ -340,6 +349,77 @@ call Math.multiply 2
 call Bola.setv 3
 pop temp 0
 label IF_FALSE0
+push this 7
+push this 8
+gt
+if-goto IF_TRUE1
+goto IF_FALSE1
+label IF_TRUE1
+push this 2
+call Bola.getX 1
+push constant 255
+gt
+if-goto IF_TRUE2
+goto IF_FALSE2
+label IF_TRUE2
+push this 2
+call Bola.Duplicar 1
+pop temp 0
+label IF_FALSE2
+push this 2
+call Bola.getX 1
+push constant 255
+eq
+if-goto IF_TRUE3
+goto IF_FALSE3
+label IF_TRUE3
+push this 2
+call Bola.Reset 1
+pop temp 0
+label IF_FALSE3
+label IF_FALSE1
+push this 7
+push this 8
+lt
+if-goto IF_TRUE4
+goto IF_FALSE4
+label IF_TRUE4
+push this 2
+call Bola.getX 1
+push constant 255
+lt
+if-goto IF_TRUE5
+goto IF_FALSE5
+label IF_TRUE5
+push this 2
+call Bola.Duplicar 1
+pop temp 0
+label IF_FALSE5
+push this 2
+call Bola.getX 1
+push constant 255
+eq
+if-goto IF_TRUE6
+goto IF_FALSE6
+label IF_TRUE6
+push this 2
+call Bola.Reset 1
+pop temp 0
+label IF_FALSE6
+label IF_FALSE4
+push this 7
+push constant 2
+eq
+push this 8
+push constant 2
+eq
+or
+if-goto IF_TRUE7
+goto IF_FALSE7
+label IF_TRUE7
+call Sys.halt 0
+pop temp 0
+label IF_FALSE7
 push this 0
 call Jugador.getY1 1
 push this 0
@@ -392,9 +472,9 @@ push this 2
 call Bola.getX 1
 push constant 10
 eq
-if-goto IF_TRUE1
-goto IF_FALSE1
-label IF_TRUE1
+if-goto IF_TRUE8
+goto IF_FALSE8
+label IF_TRUE8
 push this 0
 call Jugador.getY1 1
 push this 2
@@ -405,9 +485,9 @@ push this 2
 call Bola.getY 1
 gt
 and
-if-goto IF_TRUE2
-goto IF_FALSE2
-label IF_TRUE2
+if-goto IF_TRUE9
+goto IF_FALSE9
+label IF_TRUE9
 push this 2
 push this 2
 call Bola.getvx 1
@@ -418,8 +498,11 @@ push constant 1
 neg
 call Bola.setv 3
 pop temp 0
-goto IF_END2
-label IF_FALSE2
+push this 0
+call Jugador.Aumentar 1
+pop temp 0
+goto IF_END9
+label IF_FALSE9
 push local 2
 push this 2
 call Bola.getY 1
@@ -429,21 +512,23 @@ push this 2
 call Bola.getY 1
 gt
 and
-if-goto IF_TRUE3
-goto IF_FALSE3
-label IF_TRUE3
+if-goto IF_TRUE10
+goto IF_FALSE10
+label IF_TRUE10
 push this 2
 push this 2
 call Bola.getvx 1
 push constant 1
 neg
 call Math.multiply 2
-push this 2
-call Bola.getvy 1
+push constant 0
 call Bola.setv 3
 pop temp 0
-goto IF_END3
-label IF_FALSE3
+push this 0
+call Jugador.Aumentar 1
+pop temp 0
+goto IF_END10
+label IF_FALSE10
 push local 3
 push this 2
 call Bola.getY 1
@@ -453,9 +538,9 @@ push this 2
 call Bola.getY 1
 gt
 and
-if-goto IF_TRUE4
-goto IF_FALSE4
-label IF_TRUE4
+if-goto IF_TRUE11
+goto IF_FALSE11
+label IF_TRUE11
 push this 2
 push this 2
 call Bola.getvx 1
@@ -465,17 +550,23 @@ call Math.multiply 2
 push constant 1
 call Bola.setv 3
 pop temp 0
-label IF_FALSE4
-label IF_END3
-label IF_END2
-label IF_FALSE1
+push this 0
+call Jugador.Aumentar 1
+pop temp 0
+label IF_FALSE11
+label IF_END10
+label IF_END9
+label IF_FALSE8
 push this 2
 call Bola.getX 1
-push constant 490
+push constant 498
+push this 2
+call Bola.getY2 1
+sub
 eq
-if-goto IF_TRUE5
-goto IF_FALSE5
-label IF_TRUE5
+if-goto IF_TRUE12
+goto IF_FALSE12
+label IF_TRUE12
 push this 1
 call Jugador.getY1 1
 push this 2
@@ -486,9 +577,9 @@ push this 2
 call Bola.getY 1
 gt
 and
-if-goto IF_TRUE6
-goto IF_FALSE6
-label IF_TRUE6
+if-goto IF_TRUE13
+goto IF_FALSE13
+label IF_TRUE13
 push this 2
 push this 2
 call Bola.getvx 1
@@ -499,8 +590,11 @@ push constant 1
 neg
 call Bola.setv 3
 pop temp 0
-goto IF_END6
-label IF_FALSE6
+push this 1
+call Jugador.Aumentar 1
+pop temp 0
+goto IF_END13
+label IF_FALSE13
 push local 5
 push this 2
 call Bola.getY 1
@@ -510,21 +604,23 @@ push this 2
 call Bola.getY 1
 gt
 and
-if-goto IF_TRUE7
-goto IF_FALSE7
-label IF_TRUE7
+if-goto IF_TRUE14
+goto IF_FALSE14
+label IF_TRUE14
 push this 2
 push this 2
 call Bola.getvx 1
 push constant 1
 neg
 call Math.multiply 2
-push this 2
-call Bola.getvy 1
+push constant 0
 call Bola.setv 3
 pop temp 0
-goto IF_END7
-label IF_FALSE7
+push this 1
+call Jugador.Aumentar 1
+pop temp 0
+goto IF_END14
+label IF_FALSE14
 push local 6
 push this 2
 call Bola.getY 1
@@ -534,9 +630,9 @@ push this 2
 call Bola.getY 1
 gt
 and
-if-goto IF_TRUE8
-goto IF_FALSE8
-label IF_TRUE8
+if-goto IF_TRUE15
+goto IF_FALSE15
+label IF_TRUE15
 push this 2
 push this 2
 call Bola.getvx 1
@@ -546,92 +642,128 @@ call Math.multiply 2
 push constant 1
 call Bola.setv 3
 pop temp 0
-label IF_FALSE8
-label IF_END7
-label IF_END6
-label IF_FALSE5
+push this 1
+call Jugador.Aumentar 1
+pop temp 0
+label IF_FALSE15
+label IF_END14
+label IF_END13
+label IF_FALSE12
 push this 2
 call Bola.getX 1
 push constant 1
 eq
-if-goto IF_TRUE9
-goto IF_FALSE9
-label IF_TRUE9
+if-goto IF_TRUE16
+goto IF_FALSE16
+label IF_TRUE16
 push this 8
 push constant 1
 add
 pop this 8
+push this 0
+call Jugador.getY2 1
+pop this 12
+push this 1
+call Jugador.getY2 1
+pop this 13
 push constant 0
-call Screen.setColor 1
+pop this 3
+push constant 0
+pop this 4
+push this 0
+call Jugador.dispose 1
+pop temp 0
+push this 1
+call Jugador.dispose 1
 pop temp 0
 push this 2
-call Bola.getX 1
-push this 2
-call Bola.getY 1
-push this 2
-call Bola.getX 1
-push this 2
-call Bola.getX2 1
-add
-push this 2
-call Bola.getY 1
-push this 2
-call Bola.getY2 1
-add
-call Screen.drawRectangle 4
+call Bola.dispose 1
 pop temp 0
 push constant 0
 not
 call Screen.setColor 1
 pop temp 0
+push constant 1
+push constant 90
+push constant 10
+push constant 60
+call Jugador.new 4
+pop this 0
+push constant 500
+push constant 90
+push constant 10
+push this 13
+call Jugador.new 4
+pop this 1
 push constant 254
 push constant 127
 push constant 8
 push constant 8
 call Bola.new 4
 pop this 2
-label IF_FALSE9
+push this 0
+call Jugador.Reset 1
+pop temp 0
+label IF_FALSE16
 push this 2
 call Bola.getX 1
-push constant 492
+push constant 500
+push this 2
+call Bola.getY2 1
+sub
 eq
-if-goto IF_TRUE10
-goto IF_FALSE10
-label IF_TRUE10
+if-goto IF_TRUE17
+goto IF_FALSE17
+label IF_TRUE17
 push this 7
 push constant 1
 add
 pop this 7
+push this 0
+call Jugador.getY2 1
+pop this 12
+push this 1
+call Jugador.getY2 1
+pop this 13
 push constant 0
-call Screen.setColor 1
+pop this 3
+push constant 0
+pop this 4
+push this 0
+call Jugador.dispose 1
+pop temp 0
+push this 1
+call Jugador.dispose 1
 pop temp 0
 push this 2
-call Bola.getX 1
-push this 2
-call Bola.getY 1
-push this 2
-call Bola.getX 1
-push this 2
-call Bola.getX2 1
-add
-push this 2
-call Bola.getY 1
-push this 2
-call Bola.getY2 1
-add
-call Screen.drawRectangle 4
+call Bola.dispose 1
 pop temp 0
 push constant 0
 not
 call Screen.setColor 1
 pop temp 0
+push constant 1
+push constant 90
+push constant 10
+push this 12
+call Jugador.new 4
+pop this 0
+push constant 500
+push constant 90
+push constant 10
+push constant 60
+call Jugador.new 4
+pop this 1
 push constant 254
 push constant 127
 push constant 8
 push constant 8
 call Bola.new 4
 pop this 2
-label IF_FALSE10
+push this 1
+call Jugador.Reset 1
+pop temp 0
+label IF_FALSE17
 push constant 5
 call Sys.wait 1
 pop temp 0

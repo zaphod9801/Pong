@@ -1,6 +1,7 @@
 class Jugador {
     //atribute
     field int x1, y1, x2, y2;
+    field int diferencia;
 
     //constructor
     constructor Jugador new (int xx1 , int yy1, int xx2, int yy2){
@@ -8,12 +9,15 @@ class Jugador {
         let x2 = xx2;
         let y1 = yy1;
         let y2 = yy2;
+        let diferencia = 0;
         do Draw();
         return this;
     }
 
     //destructor
     method void dispose(){
+        do Screen.setColor(false);
+        do Screen.drawRectangle(x1,y1,x1+x2,y1+y2);
         do Memory.deAlloc(this);
         return;
     }
@@ -68,6 +72,18 @@ class Jugador {
 
     method int getY2(){
         return y2;
+    }
+
+    method void Aumentar(){
+        let y2 = y2 + 20;
+        let diferencia = diferencia + 20;
+        return;
+    }
+
+    method void Reset(){
+        let y2 = y2 - diferencia;
+        let diferencia = 0;
+        return;
     }
 
 }

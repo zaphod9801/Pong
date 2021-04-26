@@ -11,12 +11,15 @@ class Bola {
         let y2 = yy2;
         let vx = 1;
         let vy = -1;
+
         do Draw();
         return this;
     }
 
     //destructor
     method void dispose(){
+        do Screen.setColor(false);
+        do Screen.drawRectangle(x1,y1,x1+x2,y1+y2);
         do Memory.deAlloc(this);
         return;
     }
@@ -101,4 +104,19 @@ class Bola {
         return vy;
     }
 
+    method void Duplicar(){
+        if (x2 < 16) {
+            let x2 = x2 * 2;
+            let y2 = y2 * 2;
+        }
+        return;
+    }
+
+    method void Reset(){
+        do Screen.setColor(false);
+        do Screen.drawRectangle(x1,y1,x1+x2,y1+y2);
+        let x2 = 8;
+        let y2 = 8;
+        return;
+    }
 }

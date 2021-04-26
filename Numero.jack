@@ -54,6 +54,8 @@ class Numero {
         return;
     }
 
+    
+
 
 
     method void Erase () {
